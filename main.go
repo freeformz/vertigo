@@ -75,6 +75,9 @@ func NewServer() *martini.ClassicMartini {
 		"timezones": func() [416]timezone.Timezone {
 			return timezone.Locations
 		},
+		"TimeZoneEQ": func(tz string) bool {
+			return Settings.TimeZone == tz
+		},
 	}
 
 	m := martini.Classic()

@@ -14,17 +14,26 @@ import (
 	"github.com/martini-contrib/sessions"
 )
 
+type settingspage struct {
+	Settings interface{}
+	Abbrs    interface{}
+}
+
 // ReadSettings is a route which reads the local settings.json file.
 func ReadSettings(req *http.Request, res render.Render, s sessions.Session) {
 	var safesettings Vertigo
 	safesettings = *Settings
 	safesettings.CookieHash = ""
+	var sp settingspage
+	sp.Settings = safesettings
+	sp.Abbrs = Abbrs
+
 	switch Root(req) {
 	case "api":
-		res.JSON(200, safesettings)
+		res.JSON(200, Page{Data: sp})
 		return
 	case "user":
-		res.HTML(200, "settings", safesettings)
+		res.HTML(200, "settings", Page{Data: sp})
 		return
 	}
 }

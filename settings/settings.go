@@ -23,6 +23,7 @@ type Vertigo struct {
 	CookieHash         string  `json:"cookiehash,omitempty"`
 	AllowRegistrations bool    `json:"allowregistrations" form:"allowregistrations"`
 	Description        string  `json:"description" form:"description" binding:"required"`
+	TimeZone           string  `json:"timezone" form:"timezone" binding:"required"`
 	Mailer             SMTP    `json:"smtp"`
 }
 

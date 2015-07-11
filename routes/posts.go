@@ -23,7 +23,10 @@ import (
 // Normally you'd use this function as your "/" route.
 func Homepage(res render.Render) {
 	if Settings.Firstrun {
-		res.HTML(200, "installation/wizard", nil)
+		var sp settingspage
+		sp.Abbrs = Abbrs
+
+		res.HTML(200, "installation/wizard", Page{Data: sp})
 		return
 	}
 	var post Post
